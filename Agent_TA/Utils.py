@@ -34,7 +34,7 @@ class Utils():
 
         # ============= Data =============#
     
-        if market_type == 'CAMBIAL':
+        if market_type == 'Cambial':
             if timeframe == "15M":
                 # Use Metatrader
                 self.data = pd.DataFrame(mt5.copy_rates_from_pos(self.SYMBOL, mt5.TIMEFRAME_M15, self.START_POSITION, 1000))[['time', 'open', 'high', 'low', 'close', 'tick_volume']]

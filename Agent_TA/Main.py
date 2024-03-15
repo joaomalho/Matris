@@ -10,6 +10,7 @@ from CandlesPatterns import Candles_Patterns
 from TailingStoploss import Tailing_Stoploss
 from MarketOrder import Market_Order_Execution
 from ParameterOptimizer import Params_Optimization
+from pyfiglet import Figlet
 
 # -------------------------------------------------------------- #
 # -----------________________________________________----------- #
@@ -92,6 +93,7 @@ def execute_strategy():
     '''
     This function represents the execution selection according to user request 
     '''
+
     # Prompt the user for input 
     user_input_market_type = input("Which Type of Market should Matriz analyze? (STOCK/CAMBIAL): ").upper()
     while user_input_market_type not in ["STOCK", "CAMBIAL"]:
@@ -115,7 +117,7 @@ def execute_strategy():
             if user_input_autotrade == 'N':
                 
                 user_input_ticker = input("Which ticker do you want Matriz to analyze?: ").upper()
-                
+                print(user_input_ticker)
                 while True:
                     utils_instance = Utils(user_input_ticker, user_input_market_type,user_timeframe_input)        
                     main(ut=utils_instance, auto_trade=False, full_list=False, ticker=user_input_ticker)

@@ -1,3 +1,7 @@
+'''
+This file is responsible for metric variables evaluation 
+'''
+
 import numpy as np
 import pandas as pd
 import datetime as dt
