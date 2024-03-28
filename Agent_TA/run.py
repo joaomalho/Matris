@@ -98,7 +98,8 @@ class engine():
         
         if market_type == 'Cambial':
             Utils.login()
-
+        
+        
             if ticker == 'Top10':
                 if autotrade_set == 'on': 
                     while stop == False:
@@ -129,6 +130,18 @@ class engine():
                         for _, row in best_params_top10.iterrows():
                             utils_instance = Utils(row['Ticker'], market_type, timeframe)
                             self.main(ut=utils_instance, auto_trade=False, full_list=False, ticker=row['Ticker'], params=row)
+            
+            elif ticker == 'Crypto':
+                crypto = pd.DataFrame([[symbol.name, symbol.path] for symbol in mt5.symbols_get()], columns = ['Ticker', 'Path'])
+                crypto = crypto[crypto['Path'].str.contains("crypto", case=False)]
+                tickers_to_process = crypto['Ticker'].tolist()
+
+                best_params_top10 = Params_Optimization(tickers_to_process, market_type, timeframe).best_params   
+
+                for _, row in best_params_top10.iterrows():
+                    utils_instance = Utils(row['Ticker'], market_type, timeframe)
+                    self.main(ut=utils_instance, auto_trade=False, full_list=False, ticker=row['Ticker'], params=row)
+    
             else:
                 if autotrade_set == 'on': 
                     
@@ -145,7 +158,6 @@ class engine():
                         for _, row in best_params.iterrows():
                             utils_instance = Utils(row['Ticker'], market_type, timeframe)
                             self.main(ut=utils_instance, auto_trade=False, full_list=False, ticker=row['Ticker'], params=row)
-
 
 
 

@@ -60,7 +60,7 @@ class FrontEnd(ctk.CTk):
         self.label_ticker.grid(row=3, column=0)
 
         self.combobox_ticker_var = ctk.StringVar(value="")
-        self.combobox_ticker = ctk.CTkComboBox(self, values=["Top10","EURUSD"],
+        self.combobox_ticker = ctk.CTkComboBox(self, values=["Top10","EURUSD","Crypto"],
                                                 command=self.combobox_ticker_callback, 
                                                 variable=self.combobox_ticker_var)
 
@@ -75,22 +75,22 @@ class FrontEnd(ctk.CTk):
         self.button_start.grid(row=4, column=1, padx=20, pady=20)
 
         # == Exit Bot == #
-        self.button_exit = ctk.CTkButton(self, text="Exit Matrix", command=self.button_exit_click)
+        self.button_exit = ctk.CTkButton(self, text="Exit Matriz", command=self.button_exit_click)
         self.button_exit.grid(row=4, column=2, padx=20, pady=20)
-
-    # ============= Callbacks ============= #
         
+    # ============= Callbacks ============= #
+    
     def combobox_type_callback(self, choice):
         print("combobox dropdown clicked:", choice)
         self.market_type = choice
-    
+
     def combobox_timeframe_callback(self, choice):
         print("combobox dropdown clicked:", choice)
         self.timeframe = choice
-    
+
     def combobox_ticker_callback(self, choice):
         print("combobox dropdown clicked:", choice)
-        self.ticker = "EURUSD"
+        self.ticker = choice
 
     def switch_autotrade_event(self):
         print("switch toggled, current value:", self.switch_autotrade_var.get())

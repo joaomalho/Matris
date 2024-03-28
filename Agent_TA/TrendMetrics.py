@@ -118,11 +118,10 @@ class Trend_Metrics():
                                                                     })], ignore_index=True)
 
         elif type == 0:
-
              # EMA13 
             sma_1 = pta.ema(data.close, length=l1).iloc[-1]
             sma_1_prev = pta.ema(data.close, length=l1).iloc[-2]
-            # EMA48    
+            # EMA48
             sma_2 = pta.ema(data.close, length=l2).iloc[-1]
             sma_2_prev = pta.ema(data.close, length=l2).iloc[-2]
             # EMA200
@@ -131,8 +130,8 @@ class Trend_Metrics():
 
             # Previous Cross Over Check
             if sma_1_prev > sma_2_prev > sma_3_prev:
-                prev_signal = 'Buy' 
-            elif sma_1_prev < sma_2_prev < sma_3_prev :
+                prev_signal = 'Buy'
+            elif sma_1_prev < sma_2_prev < sma_3_prev:
                 prev_signal = 'Sell'
             else:
                 prev_signal = 'Flat'
