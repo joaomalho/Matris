@@ -3,6 +3,7 @@
 '''
 
 # Python Libraries
+import numpy as np
 import pandas as pd
 import datetime as dt
 import MetaTrader5 as mt5
@@ -10,7 +11,6 @@ from datetime import time
 from connections import Connections
 
 class Utils():
-
     def __init__(self, ticker, market_type, timeframe) -> None:
         #============= FIXED VARIAVEIS =============#
             # Strategy parameters
@@ -79,7 +79,7 @@ class Utils():
             }
 
         # # Get the current time
-        current_time = dt.datetime.now().time()
+        self.current_time = dt.datetime.now().time()
         # for session, (open_time, close_time) in self.market_sessions.items():
         #     if open_time <= current_time <= close_time:
         #         current_session = session
@@ -110,7 +110,7 @@ class Utils():
         non_empty_columns = self.result_df.columns[~self.result_df.isna().all()]
         if self.result_df.empty or self.result_df[non_empty_columns].isna().all().all():
             new_data = pd.DataFrame({
-                                        'Date': [current_time],
+                                        'Date': [self.current_time],
                                         'Ticker': [self.SYMBOL],
                                         # 'Session': [self.current_session],
                                         'Magic': [self.MAGIC],
@@ -163,6 +163,33 @@ class Utils():
         mt5.initialize()
         mt5.login(51116412, '39sz2vL3', 'ICMarketsSC-Demo')
         
+
+
+
+
+
+    def get_tickerlist(self):
+        tickerlists = pd.DataFrame([[symbol.name, symbol.path, symbol.description] for symbol in mt5.symbols_get()], columns = ['Ticker', 'Path', 'Description'])
+
+        tickerlists['type'] = np.where(tickerlists['Path'].str.contains("forex", case=False), 'cambial',
+                                    np.where(tickerlists['Path'].str.contains("crypto", case=False), 'crypto',
+                                                np.where(tickerlists['Path'].str.contains("indices", case=False), 'indice',
+                                                        np.where(tickerlists['Path'].str.contains("commodities", case=False), 'commodity',
+                                                                np.where(tickerlists['Path'].str.contains("stock", case=False), 'stock', None)
+                                                                )
+                                                        )
+                                            )
+                                    )
+        self.tickerlists = tickerlists
+
+
+
+
+
+
+
+
+
 
 # Setting for prints
 class Config():

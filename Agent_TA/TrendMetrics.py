@@ -73,93 +73,49 @@ class Trend_Metrics():
             * Sell = 13 < 48 < 200
             * Flat = Else
         '''
-        if type == 1:
-                
-            # EMA13 
-            ema_1 = pta.ema(data.close, length=l1).iloc[-1]
-            ema_1_prev = pta.ema(data.close, length=l1).iloc[-2]
-            # EMA48    
-            ema_2 = pta.ema(data.close, length=l2).iloc[-1]
-            ema_2_prev = pta.ema(data.close, length=l2).iloc[-2]
-            # EMA200
-            ema_3 = pta.ema(data.close, length=l3).iloc[-1]
-            ema_3_prev = pta.ema(data.close, length=l3).iloc[-2]
+   
+        # EMA13 
+        ema_1 = pta.ema(data.close, length=l1).iloc[-1]
+        ema_1_prev = pta.ema(data.close, length=l1).iloc[-2]
+        # EMA48    
+        ema_2 = pta.ema(data.close, length=l2).iloc[-1]
+        ema_2_prev = pta.ema(data.close, length=l2).iloc[-2]
+        # EMA200
+        ema_3 = pta.ema(data.close, length=l3).iloc[-1]
+        ema_3_prev = pta.ema(data.close, length=l3).iloc[-2]
 
-            # Previous Cross Over Check
-            if ema_1_prev > ema_2_prev > ema_3_prev:
-                prev_signal = 'Buy' 
-            elif ema_1_prev < ema_2_prev < ema_3_prev :
-                prev_signal = 'Sell'
-            else:
-                prev_signal = 'Flat'
-                
-            # Current condition to mark signal
-            if (prev_signal == 'Flat' or prev_signal == 'Sell') and ema_1_prev > ema_2_prev > ema_3_prev :
-                emas_crossover_signal = 'Buy'
-                emas_crossover_relevance = 48
-
-            elif (prev_signal == 'Flat' or prev_signal == 'Buy') and ema_1_prev < ema_2_prev < ema_3_prev :
-                emas_crossover_signal = 'Sell'
-                emas_crossover_relevance = 48
-            else:
-                emas_crossover_signal = 'Flat'
-                emas_crossover_relevance = 0
-
-            self.crossover_signal = emas_crossover_signal
-            self.ma_1 = ema_1   
-            self.ma_2 = ema_2
-            self.ma_3 = ema_3
-            self.crossover_relevance = emas_crossover_relevance
-
-            self.result_df = pd.concat([self.result_df, pd.DataFrame({
-                                                                        'Function': ['Crossover'],
-                                                                        'Signal': [self.crossover_signal],
-                                                                        'Relevance': [self.crossover_relevance]
-                                                                    })], ignore_index=True)
-
-        elif type == 0:
-             # EMA13 
-            sma_1 = pta.ema(data.close, length=l1).iloc[-1]
-            sma_1_prev = pta.ema(data.close, length=l1).iloc[-2]
-            # EMA48
-            sma_2 = pta.ema(data.close, length=l2).iloc[-1]
-            sma_2_prev = pta.ema(data.close, length=l2).iloc[-2]
-            # EMA200
-            sma_3 = pta.ema(data.close, length=l3).iloc[-1]
-            sma_3_prev = pta.ema(data.close, length=l3).iloc[-2]
-
-            # Previous Cross Over Check
-            if sma_1_prev > sma_2_prev > sma_3_prev:
-                prev_signal = 'Buy'
-            elif sma_1_prev < sma_2_prev < sma_3_prev:
-                prev_signal = 'Sell'
-            else:
-                prev_signal = 'Flat'
-                
-            # Current condition to mark signal
-            if (prev_signal == 'Flat' or prev_signal == 'Sell') and sma_1_prev > sma_2_prev > sma_3_prev :
-                smas_crossover_signal = 'Buy'
-                smas_crossover_relevance = 48
-
-            elif (prev_signal == 'Flat' or prev_signal == 'Buy') and sma_1_prev < sma_2_prev < sma_3_prev :
-                smas_crossover_signal = 'Sell'
-                smas_crossover_relevance = 48
-            else:
-                smas_crossover_signal = 'Flat'
-                smas_crossover_relevance = 0
-
-            self.crossover_signal = smas_crossover_signal
-            self.ma_1 = sma_1   
-            self.ma_2 = sma_2
-            self.ma_3 = sma_3
-            self.crossover_relevance = smas_crossover_relevance
-
-            self.result_df = pd.concat([self.result_df, pd.DataFrame({
-                                                                        'Function': ['Crossover'],
-                                                                        'Signal': [self.crossover_signal],
-                                                                        'Relevance': [self.crossover_relevance]
-                                                                    })], ignore_index=True)
+        # Previous Cross Over Check
+        if ema_1_prev > ema_2_prev > ema_3_prev:
+            prev_signal = 'Buy' 
+        elif ema_1_prev < ema_2_prev < ema_3_prev :
+            prev_signal = 'Sell'
+        else:
+            prev_signal = 'Flat'
             
+        # Current condition to mark signal
+        if (prev_signal == 'Flat' or prev_signal == 'Sell') and ema_1_prev > ema_2_prev > ema_3_prev :
+            emas_crossover_signal = 'Buy'
+            emas_crossover_relevance = 48
+
+        elif (prev_signal == 'Flat' or prev_signal == 'Buy') and ema_1_prev < ema_2_prev < ema_3_prev :
+            emas_crossover_signal = 'Sell'
+            emas_crossover_relevance = 48
+        else:
+            emas_crossover_signal = 'Flat'
+            emas_crossover_relevance = 0
+
+        self.crossover_signal = emas_crossover_signal
+        self.ma_1 = ema_1   
+        self.ma_2 = ema_2
+        self.ma_3 = ema_3
+        self.crossover_relevance = emas_crossover_relevance
+
+        self.result_df = pd.concat([self.result_df, pd.DataFrame({
+                                                                    'Function': ['Crossover'],
+                                                                    'Signal': [self.crossover_signal],
+                                                                    'Relevance': [self.crossover_relevance]
+                                                                })], ignore_index=True)
+
     def get_sma_bands(self, data : pd.DataFrame, l1 : int, std : int):
         '''
         This function measures the SMA Bollinger Bands interval
