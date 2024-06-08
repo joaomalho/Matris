@@ -31,7 +31,7 @@ class Utils():
         self.MIDDLE_LEVEL = 50
                 # Harmonic Patterns
         self.err_allowed = 10.0/100 
-
+        
         # ============= Data =============#
     
         if market_type == 'Cambial':

@@ -43,7 +43,6 @@ def main(ut, auto_trade: bool, full_list: bool, ticker, params):
     cp.hammer(ut.data)
     cp.hanging_man(ut.data)
 
-  
     # Bagging Signal
     bg = Decision(ticker)
     

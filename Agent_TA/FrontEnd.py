@@ -5,7 +5,6 @@ This Main represents the interface of the engine.
 from run import engine
 import customtkinter as ctk
 
-
 class FrontEnd(ctk.CTk):
     def __init__(self):
         super().__init__()
@@ -20,7 +19,7 @@ class FrontEnd(ctk.CTk):
 
         # ============= Aplication Window ============= #
         self.geometry("600x500")
-        self.title("Matriz Trading Engine ")
+        self.title("Matris Trading Engine ")
 
         # ============= Widgets ============= #
 

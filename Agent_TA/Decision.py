@@ -7,9 +7,8 @@ from connections import Connections
 
 class Decision():
 
-    def __init__(self, ticker) -> None:
+    def __init__(self) -> None:
 
-        self.SYMBOL = ticker
         self.decision_df = pd.DataFrame(columns=['Function', 'Signal', 'Relevance'])
                 
 
@@ -92,7 +91,7 @@ class Decision():
         # Filter the DataFrame to include only rows where the accuracy is above 3
         ## V1 ## filtered_df = self.decision_df[self.decision_df['Accuracy'] > 50.00]
         
-        filtered_df = self.decision_df[self.decision_df['Relevance'] >= 4]
+        filtered_df = self.decision_df[self.decision_df['Relevance'] >= 2]
         
         # Check if there are any rows that meet the condition
         if not filtered_df.empty:

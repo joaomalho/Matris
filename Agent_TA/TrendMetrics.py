@@ -177,8 +177,8 @@ class Trend_Metrics():
                                                             'Relevance': [self.bbands_relevance]
                                                         })], ignore_index=True) 
 
-    # ========= MOMENTUM TECHNIQUES ========= #
-  
+
+    # ========= MOMENTUM TECHNIQUES ========= #  
     def get_rsi(self, data : pd.DataFrame, l1 : int, oblvl : int, oslvl : int):
         '''
         This function measures the Relative Strenght Index canal
