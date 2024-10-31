@@ -1,2 +1,2 @@
 # Matriz
- Auto Market Analizer
+ Auto Market Analyzer
